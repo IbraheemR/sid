@@ -5,11 +5,10 @@
 
   "name": "SID",
   "description": "Changes server brand and provides randomised MOTD config.",
-  "authors": [
-    "Ibraheem Rodrigues"
-  ],
+  "authors": ["Ibraheem Rodrigues"],
   "contact": {
-    "homepage": "https://ibraheemrodrigues.com/"
+    "homepage": "https://ibraheemrodrigues.com/",
+    "source": "https://github.com/IbraheemR/sid"
   },
 
   "license": "MIT",
@@ -17,13 +16,9 @@
 
   "environment": "*",
   "entrypoints": {
-    "main": [
-      "com.ibraheemrodrigues.sid.Main"
-    ]
+    "main": ["com.ibraheemrodrigues.sid.Main"]
   },
-  "mixins": [
-    "sid.mixins.json"
-  ],
+  "mixins": ["sid.mixins.json"],
 
   "depends": {
     "fabricloader": ">=0.7.4",
