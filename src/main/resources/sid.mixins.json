@@ -2,10 +2,9 @@
   "required": true,
   "minVersion": "0.8",
   "package": "com.ibraheemrodrigues.sid.mixin",
-  "compatibilityLevel": "JAVA_8",
+  "compatibilityLevel": "JAVA_17",
   "mixins": [
-    "MinecraftServerMixin",
-    "ServerMetadataMixin"
+    "ChangeServerBrandMixin"
   ],
   "client": [
   ],
