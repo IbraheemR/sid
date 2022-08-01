@@ -1,52 +1,46 @@
 package com.ibraheemrodrigues.sid;
 
 import net.fabricmc.api.DedicatedServerModInitializer;
-import net.fabricmc.api.ModInitializer;
-import net.minecraft.server.MinecraftServer;
-import net.minecraft.server.dedicated.MinecraftDedicatedServer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.util.Scanner;
 
 public class SIDMain implements DedicatedServerModInitializer {
 	public static final Logger LOGGER = LoggerFactory.getLogger("sid");
 
 	public static String CUSTOM_BRAND;
+	public static String[] CUSTOM_MOTD_LIST = new String[] {};
 
 	@Override
 	public void onInitializeServer() {
 		LOGGER.info("SID up!");
 
-		File brandFile = new File("brand.txt");
-
-		if (brandFile.isFile()) {
-			try {
-				Scanner brandReader = new Scanner(brandFile);
-				String brand = "";
-				if (brandReader.hasNext()) {
-					brand = brandReader.nextLine();
+		ConfigFile brandConfig = new ConfigFile(
+				"brand.txt",
+				new String[] {
+					"# Add a custom brand below",
+					"#SID"
 				}
-				if (brand == "") {
-					LOGGER.info("No custom brand set in brand.txt");
-				} else {
-					CUSTOM_BRAND = brand;
-					LOGGER.info("Set brand to '" + CUSTOM_BRAND + "'");
-				}
-			} catch (FileNotFoundException e) {
-				LOGGER.warn("Failed to read brand.txt! Will not set custom brand.");
-			}
+		);
+		CUSTOM_BRAND = brandConfig.readFirstLine();
+		if (CUSTOM_BRAND != null) {
+			LOGGER.info("Set custom brand: " + CUSTOM_BRAND);
 		} else {
-			try {
-				LOGGER.info("No brand.txt file exists. Creating it...");
-				brandFile.createNewFile();
-			} catch (IOException e) {
-				LOGGER.warn("Failed to create brand.txt!");
-			}
+			LOGGER.info("No custom brand set.");
+		}
+
+		ConfigFile motdConfig = new ConfigFile("motds.txt", new String[] {
+				"# Add custom motds below. Supports color codes & \\n. Lines starting with # are ignored.",
+				"# Examples:",
+				"# §1Hello world!",
+				"# §aThis is a random message!",
+				"# §4Nice shoes!",
+				"# §dThis message spans\\nmultiple lines!"
+		});
+		CUSTOM_MOTD_LIST = motdConfig.readAllLines();
+		if (CUSTOM_MOTD_LIST.length > 0) {
+			LOGGER.info("Using random MOTDs from motds.txt. Will override server.properties.");
+		} else {
+			LOGGER.info("No random MOTDs loaded.");
 		}
 	}
 }

@@ -1,11 +1,28 @@
-# SID by Ibraheem Rodrigues
+# SID
 
-A small mod to change the server brand, as seen in the F3/Debug menu
+A small mod to set a random MOTD & custom brand on the server.
 
-![](debug.png)
+A new MOTD will be chosen every time the server is pinged.
+
+![](server_menu.jpg)
+
+The server brand is as seen in the F3 debug screen:
+
+![](debug.jpg)
 
 Install on your dedicated server.
 
-Creates a file `brand.txt` next to `server.properties` and `eula.txt`.
+Creates two new config files: `motd.txt` and `brand.txt`
 
-Add your custom brand on the first line.
+Add a message on each line `motd.txt` to be chosen randomly. Supports [color codes](https://minecraft.fandom.com/wiki/Color) & `\n`
+```
+§1Hello world!
+§aThis is a random message!
+§4Nice shoes!
+§dThis message spans \n multiple lines!
+```
+
+Add your custom brand on the first line of `brand.txt`
+```
+EPIC!
+```
