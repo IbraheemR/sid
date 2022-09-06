@@ -1,6 +1,6 @@
 # SID
 
-A small mod to set a random MOTD & custom brand on the server.
+A small mod to set a random MOTD & custom brand on your server.
 
 A new MOTD will be chosen every time the server is pinged.
 
